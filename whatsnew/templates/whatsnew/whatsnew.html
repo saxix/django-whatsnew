@@ -1,0 +1,35 @@
+{% extends "whatsnew/base.html" %}
+{% block content %}
+    <style>
+        #django-whatsnew .button.b-close {
+            background-color: #2B91AF;
+            border-radius: 7px;
+            box-shadow: none;
+            font: bold 131% sans-serif;
+            cursor: pointer;
+            padding: 0 6px 2px;
+            position: absolute;
+            right: -7px;
+            top: -7px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        #django-whatsnew {
+            font-size: 200%;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 0 25px 5px #999999;
+            color: #111111;
+            display: none;
+            min-width: 450px;
+            padding: 0px 5px 5px 15px;
+        }
+    </style>
+
+    <div id="django-whatsnew" style="display: none">
+        <span class="button b-close"><span>X</span></span>
+        {{ news.content|safe }}
+        <span><input type="checkbox" id="whatsnew-seen">do not show again</span>
+    </div>
+{% endblock content %}

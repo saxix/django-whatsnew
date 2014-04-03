@@ -1,0 +1,38 @@
+Django What's New
+==================
+
+
+Simple application to manage "what's new" welcome screen based on package version.
+
+
+How to use
+----------
+
+put ``whatsnew`` in your INSTALLED_APPS::
+
+    INTALLED_APPS=(
+        ...
+        'whatsnew'
+    )
+
+
+modify your base template as
+
+.. code-block:: html
+
+    {% load whatsnew %}
+
+    <body>
+    {% whatsnew '<your_main_package_name>' %}
+
+
+
+.. note:: Package must contains valid PEP386 entry in the __init__ of the main module.
+
+How version are checked
+------------------------
+
+- try to get version number using setuptools
+- check the main package name for 'version', 'VERSION' or '__version__'
+- try to call package.get_version()
+- raise DistributionNotFound
