@@ -3,7 +3,7 @@ import datetime
 import os
 
 NAME = 'whatsnew'
-VERSION = __version__ = (0, 1, 0, 'final', 0)
+VERSION = __version__ = (0, 2, 0, 'final', 0)
 
 
 def get_version():  # pragma: no cover
