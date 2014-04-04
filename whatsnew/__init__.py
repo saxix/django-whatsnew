@@ -2,8 +2,8 @@ import subprocess
 import datetime
 import os
 
-NAME = 'whatsnew'
-VERSION = __version__ = (0, 3, 0, 'final', 0)
+NAME = 'django-whatsnew'
+VERSION = __version__ = (0, 4, 0, 'final', 0)
 
 
 def get_version():  # pragma: no cover
