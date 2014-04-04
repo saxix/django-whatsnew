@@ -30,9 +30,6 @@ class Migration(SchemaMigration):
         db.delete_column(u'whatsnew_whatsnew', 'enabled')
 
 
-        # Changing field 'WhatsNew.version'
-        db.alter_column(u'whatsnew_whatsnew', 'version', self.gf('semantic_version.django_fields.VersionField')(max_length=200))
-
     models = {
         u'whatsnew.whatsnew': {
             'Meta': {'object_name': 'WhatsNew'},

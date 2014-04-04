@@ -1,5 +1,37 @@
-{% extends "whatsnew/base.html" %}
-{% block content %}
+{% load static %}
+{% block whatsnew-script %}
+    <script src="{% static 'whatsnew/js/jquery.bpopup.min.js' %}"></script>
+    <script>
+            function setCookie(name, value, days) {
+                var expires;
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toGMTString();
+                } else {
+                    expires = "";
+                }
+                document.cookie = name + "=" + value + expires + "; path=/";
+            }
+            setCookie('{{ name }}', '{{ news.version }}');
+
+            function whatsnewDisplay() {
+                $('#django-whatsnew').bPopup({
+                    speed: 450,
+                    transition: 'slideDown'
+                });
+                $('#whatsnew-seen').click(function () {
+                    setCookie('{{ name }}', '{{ news.version }}', 365);
+                });
+            }
+            {% if display %}
+            $(function () {
+                whatsnewDisplay();
+            });
+            {% endif %}
+    </script>
+{% endblock whatsnew-script %}
+{% block whatsnew-content %}
     <style>
         #django-whatsnew .button.b-close {
             background-color: #2B91AF;
@@ -32,4 +64,4 @@
         {{ news.content|safe }}
         <span><input type="checkbox" id="whatsnew-seen">do not show again</span>
     </div>
-{% endblock content %}
+{% endblock whatsnew-content %}
