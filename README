@@ -4,11 +4,13 @@ Django What's New
 
 Simple application to manage "what's new" welcome screen based on package version.
 
+.. note:: Package must contains valid PEP386 entry in the __init__ of the main module.
+
 
 How to use
 ----------
 
-put ``whatsnew`` in your INSTALLED_APPS::
+- put ``whatsnew`` in your INSTALLED_APPS::
 
     INTALLED_APPS=(
         ...
@@ -16,18 +18,95 @@ put ``whatsnew`` in your INSTALLED_APPS::
     )
 
 
-modify your base template as
+- modify your base template as
 
 .. code-block:: html
+    <link href="{% static 'whatsnew/whatsnew.min.css' %}" rel="stylesheet" media="screen">
+    <script language="JavaScript" src="{% static 'whatsnew/js/whatsnew.min.js' %}"></script>
 
     {% load whatsnew %}
 
     <body>
     {% whatsnew '<your_main_package_name>' %}
 
+- create your :file:`whatsnew/whatsnew.html` like:
 
+.. code-block:: html
+    <style>
+        #django-whatsnew .button.b-close {
+            background-color: #2B91AF;
+            border-radius: 7px;
+            box-shadow: none;
+            font: bold 131% sans-serif;
+            cursor: pointer;
+            padding: 0 6px 2px;
+            position: absolute;
+            right: -7px;
+            top: -7px;
+            text-align: center;
+            text-decoration: none;
+        }
 
-.. note:: Package must contains valid PEP386 entry in the __init__ of the main module.
+        #django-whatsnew {
+            font-size: 200%;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 0 25px 5px #999999;
+            color: #111111;
+            display: none;
+            min-width: 450px;
+            padding: 0px 5px 5px 15px;
+        }
+    </style>
+    <script>
+        {% if display %}
+
+            function setCookie(name, value, days) {
+                var expires;
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toGMTString();
+                } else {
+                    expires = "";
+                }
+                document.cookie = name + "=" + value + expires + "; path=/";
+            }
+            setCookie('{{ name }}', '{{ news.version }}');
+            $(function () {
+                $('#django-whatsnew').bPopup({
+                    speed: 450,
+                    transition: 'slideDown'
+                });
+                $('#whatsnew-seen').click(function () {
+                    setCookie('{{ name }}', '{{ news.version }}', 365);
+                });
+            });
+        {% endif %}
+    </script>
+    <div id="django-whatsnew" style="display: none">
+        <span class="button b-close"><span>X</span></span>
+        {{ news.content|safe }}
+        <span><input type="checkbox" id="whatsnew-seen">do not show again</span>
+    </div>
+
+- and your :file:`whatsnew/test.html` like:
+
+.. code-block:: html
+
+    {% extends "base.html" %}{% load whatsnew %}
+
+    {% block body %}
+        {% whatsnew 'whatsnew' 1 %}
+        <script>
+            $('.b-close').click(function () {
+                 window.history.go(-1);
+            })
+
+        </script>
+    {% endblock body %}
+    {% block jira %}{% endblock jira %}
+
 
 How version are checked
 ------------------------

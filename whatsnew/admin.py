@@ -19,6 +19,7 @@ class WhatsNewForm(forms.ModelForm):
 
 
 class WhatsNewAdmin(ModelAdmin):
+    change_form_template = 'admin/whatsnew/change_form_whatsnew.html'
     list_display = ('version', 'expire', 'enabled')
     form = WhatsNewForm
 
