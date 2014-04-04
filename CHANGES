@@ -1,5 +1,12 @@
+Release 0.3
+-----------------
+
+* fixed bug in case no entries available
+
+
 Release 0.2
 -----------------
+
 * add test url
 * fixed wrong migrations
 * by default display the screen only one time per session.

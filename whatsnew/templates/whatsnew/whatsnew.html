@@ -2,33 +2,34 @@
 {% block whatsnew-script %}
     <script src="{% static 'whatsnew/js/jquery.bpopup.min.js' %}"></script>
     <script>
-            function setCookie(name, value, days) {
-                var expires;
-                if (days) {
-                    var date = new Date();
-                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    expires = "; expires=" + date.toGMTString();
-                } else {
-                    expires = "";
-                }
-                document.cookie = name + "=" + value + expires + "; path=/";
+        function setCookie(name, value, days) {
+            var expires;
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toGMTString();
+            } else {
+                expires = "";
             }
-            setCookie('{{ name }}', '{{ news.version }}');
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
 
-            function whatsnewDisplay() {
-                $('#django-whatsnew').bPopup({
-                    speed: 450,
-                    transition: 'slideDown'
-                });
-                $('#whatsnew-seen').click(function () {
-                    setCookie('{{ name }}', '{{ news.version }}', 365);
-                });
-            }
-            {% if display %}
+        function whatsnewDisplay() {
+            $('#django-whatsnew').bPopup({
+                speed: 450,
+                transition: 'slideDown'
+            });
+
+        }
+        {% if display %}
+            setCookie('{{ name }}', '{{ version }}');
+            $('#whatsnew-seen').click(function () {
+                setCookie('{{ name }}', '{{ version }}', 365);
+            });
             $(function () {
                 whatsnewDisplay();
             });
-            {% endif %}
+        {% endif %}
     </script>
 {% endblock whatsnew-script %}
 {% block whatsnew-content %}
@@ -61,7 +62,7 @@
 
     <div id="django-whatsnew" style="display: none">
         <span class="button b-close"><span>X</span></span>
-        {{ news.content|safe }}
+        {{ content|safe }}
         <span><input type="checkbox" id="whatsnew-seen">do not show again</span>
     </div>
 {% endblock whatsnew-content %}
