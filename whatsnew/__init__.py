@@ -3,7 +3,7 @@ import datetime
 import os
 
 NAME = 'django-whatsnew'
-VERSION = __version__ = (0, 4, 0, 'final', 0)
+VERSION = __version__ = (0, 5, 0, 'final', 0)
 
 
 def get_version():  # pragma: no cover
