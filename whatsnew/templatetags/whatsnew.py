@@ -26,7 +26,7 @@ def whatsnew(context, package_name, force=1):
         last = WhatsNew.objects.filter(enabled=True).filter(Q(expire__gte=today) | Q(expire=None)).latest()
         ctx.update({'content': last.content,
                     'version': last.version,
-                    'display': (last.version == last_seen and not force)})
+                    'display': (last.version != last_seen) or force})
     except WhatsNew.DoesNotExist:
         ctx.update({'content': None, 'version': None, 'display': force})
 
