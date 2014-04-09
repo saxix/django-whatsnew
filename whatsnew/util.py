@@ -23,4 +23,3 @@ def get_version(package_name):
         return str(version)
     else:
         raise pkg_resources.DistributionNotFound
-
