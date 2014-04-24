@@ -1,3 +1,11 @@
+Release 0.8
+-----------
+
+* added some tests
+* new view 'changelog'
+* new field 'date'
+
+
 Release 0.7
 -----------
 
