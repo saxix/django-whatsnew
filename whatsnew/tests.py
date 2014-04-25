@@ -54,3 +54,14 @@ def test_templatetag():
     ret = whatsnew({'request': request}, 'whatsnew')
 
     assert not ret['display']
+
+
+@pytest.mark.django_db
+def test_ordering():
+    G(WhatsNew, version='0.1', enabled=True, expire=None)
+    G(WhatsNew, version='0.3', enabled=True, expire=None)
+    assert list(WhatsNew.objects.values_list('pk', flat=True)) == [2, 1]
+
+    G(WhatsNew, version='0.2', enabled=True, expire=None)
+    assert list(WhatsNew.objects.values_list('pk', flat=True)) == [2, 3, 1]
+    assert WhatsNew.objects.latest().pk == 2
