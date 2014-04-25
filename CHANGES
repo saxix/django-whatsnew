@@ -1,12 +1,10 @@
 Release 0.9
 -----------
-
 * improved ordering based on varsion value
 
 
 Release 0.8
 -----------
-
 * added some tests
 * new view 'changelog'
 * new field 'date'
@@ -14,35 +12,31 @@ Release 0.8
 
 Release 0.7
 -----------
-
 * fixes version comparison
+
 
 Release 0.6
 -----------
-
 * only dsiplay one per browser session
 
 
 Release 0.5
 -----------
-
 * fixed bug in templateg
 
 
 Release 0.4
 -----------------
-
 * renamed app name as django-whatsnew
+
 
 Release 0.3
 -----------------
-
 * fixed bug in case no entries available
 
 
 Release 0.2
 -----------------
-
 * add test url
 * fixed wrong migrations
 * by default display the screen only one time per session.
@@ -50,5 +44,4 @@ Release 0.2
 
 Release 0.1
 -----------------
-
 * Initial release
