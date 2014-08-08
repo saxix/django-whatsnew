@@ -7,7 +7,7 @@ from django.utils.translation import gettext as _
 
 class WhatsNew(models.Model):
     version = VersionField(order_field='order')
-    date = models.DateField(default=datetime.today())
+    date = models.DateField(default=datetime.today)
     content = models.TextField()
     expire = models.DateField(blank=True, null=True)
     enabled = models.BooleanField(default=False)
