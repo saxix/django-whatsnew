@@ -10,8 +10,7 @@ class Version(object):
         for i, part in enumerate(self._components):
             if '*' in part:
                 break
-        components_len = sum(1 for _ in self._components)
-        if components_len > i:
+        if len(list(self._components)) > i:
             self._patch = map(lambda x: x.replace('*', ''), self._components[i + 1:-1])
         parts = list(self._components[:i])
         parts.extend('0' * (3 - len(parts)))
